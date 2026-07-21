@@ -14,16 +14,16 @@ interface NotesProps {
     slug: string[];
   }>;
 }
-export async function generateMetadata({
-  params,
-}: NotesProps): Promise<Metadata> {
-  const { id } = await params;
-  const note = await fetchNotes();
-  return {
-    title: `Note: ${note.title}`,
-    description: note.content.slice(0, 30),
-  };
-}
+// export async function generateMetadata({
+//   params,
+// }: NotesProps): Promise<Metadata> {
+//   const { slug } = await params;
+//   // const note = await fetchNotes();
+//   return {
+//     title: `Note: ${slug.title}`,
+//     description: slug.content.slice(0, 30),
+//   };
+// }
 export default async function Notes({ params }: NotesProps) {
   const { slug } = await params;
 
