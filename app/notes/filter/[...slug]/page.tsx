@@ -8,22 +8,43 @@ import {
 import NotesClient from './Notes.client';
 import { fetchNotes } from '@/lib/api';
 import { NoteTag } from '@/types/note';
+import { Metadata } from 'next';
 
 interface NotesProps {
   params: Promise<{
     slug: string[];
   }>;
 }
-// export async function generateMetadata({
-//   params,
-// }: NotesProps): Promise<Metadata> {
-//   const { slug } = await params;
-//   // const note = await fetchNotes();
-//   return {
-//     title: `Note: ${slug.title}`,
-//     description: slug.content.slice(0, 30),
-//   };
-// }
+export async function generateMetadata({
+  params,
+}: NotesProps): Promise<Metadata> {
+  const { slug } = await params;
+  const userId = slug[0];
+  return {
+    title: userId === 'All' ? 'Posts - All Users' : `Posts - User ${userId}`,
+    description:
+      userId === 'All'
+        ? 'List of posts from all users'
+        : `List of posts from user ${userId}`,
+    openGraph: {
+      title: userId === 'All' ? 'Posts - All Users' : `Posts - User ${userId}`,
+      description:
+        userId === 'All'
+          ? 'List of posts from all users'
+          : `List of posts from user ${userId}`,
+      url: 'https://08-zustand-one-jade.vercel.app/',
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt:
+            userId === 'All' ? 'Posts - All Users' : `Posts - User ${userId}`,
+        },
+      ],
+    },
+  };
+}
 export default async function Notes({ params }: NotesProps) {
   const { slug } = await params;
 
