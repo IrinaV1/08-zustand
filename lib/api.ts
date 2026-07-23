@@ -1,4 +1,4 @@
-import { Note, NoteTag } from '@/types/note';
+import { NewNote, Note, NoteTag } from '@/types/note';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
@@ -9,11 +9,6 @@ axios.defaults.headers.common.Authorization = `Bearer ${myKey}`;
 export interface NotesHttpResponse {
   notes: Note[];
   totalPages: number;
-}
-export interface NewNote {
-  title: string;
-  content: string;
-  tag: NoteTag;
 }
 
 export async function fetchNotes(
