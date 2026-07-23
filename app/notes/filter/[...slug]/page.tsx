@@ -19,27 +19,26 @@ export async function generateMetadata({
   params,
 }: NotesProps): Promise<Metadata> {
   const { slug } = await params;
-  const userId = slug[0];
+  const tag = slug[0];
   return {
-    title: userId === 'All' ? 'Posts - All Users' : `Posts - User ${userId}`,
+    title: tag === 'all' ? 'Posts - All Users' : `Posts - User ${tag}`,
     description:
-      userId === 'All'
+      tag === 'all'
         ? 'List of posts from all users'
-        : `List of posts from user ${userId}`,
+        : `List of posts from user ${tag}`,
     openGraph: {
-      title: userId === 'All' ? 'Posts - All Users' : `Posts - User ${userId}`,
+      title: tag === 'all' ? 'Posts - All Users' : `Posts - User ${tag}`,
       description:
-        userId === 'All'
+        tag === 'all'
           ? 'List of posts from all users'
-          : `List of posts from user ${userId}`,
+          : `List of posts from user ${tag}`,
       url: 'https://08-zustand-one-jade.vercel.app/',
       images: [
         {
           url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
           width: 1200,
           height: 630,
-          alt:
-            userId === 'All' ? 'Posts - All Users' : `Posts - User ${userId}`,
+          alt: tag === 'all' ? 'Posts - All Users' : `Posts - User ${tag}`,
         },
       ],
     },
